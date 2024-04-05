@@ -1,0 +1,37 @@
+import streamlit as st
+import pickle
+
+
+
+def get_Gene_One():
+    Gene_One = st.text_input("Gene one")
+    return Gene_One
+
+def get_Gene_Two():
+    Gene_Two = st.text_input("Gene two")
+    return Gene_Two
+
+
+def predict_species(Gene_One, Gene_Two):
+    loaded_model = pickle.load(open('decision_tree_model.pkl','rb'))
+    new_data = [[float(Gene_one),float(Gene_Two)]]
+    prediction = loaded_model.predict(new_data)
+    st.write("Prediction with new data: ")
+    st.write(prediction)
+    
+
+if __name__ == "__main__":
+    st.title('Cancer Patient prediction with Decision Tree model')
+    st.image('gene_expression.png')    
+    Gene_One= get_Gene_One_value()
+    Gene_two = get_Gene_Two_value()
+    
+    st.write("The parameters you entered are: ")
+    st.write("Gene One ", Gene_One_value)
+    st.write("Gene Two ", Gene_Two_value)
+    
+
+
+if st.button("Predict"):
+    predict_species(Gene_Two_value,Gene_One_value)
+    
